@@ -5,5 +5,6 @@ You will need to install the keyboard, pysimplegui, and MCPI python modules (The
 ## To Install:
 Run this in terminal (Ctrl+C and Ctrl+Shift+V) 
 ```bash
+sudo pip3 install keyboard pysimplegui mcpi
 git clone https://github.com/bigjango13/Nebuchadnezzar-2-hack
 ```
