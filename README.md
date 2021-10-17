@@ -10,5 +10,5 @@ git clone https://github.com/bigjango13/Morpheus-2-hack
 ```
 ## To Run:
 ```bash
-sudo python3 /Morpheus-2-hack/Morpheus.py
+sudo python3 Morpheus-2-hack/Morpheus.py
 ```
