@@ -1,5 +1,5 @@
 # Morpheus 2.0
-A MCPI hack with many features
+A use of the python MCPI to enhance the multiplayer and singleplayer gameplay.
 ## To Use:
 You will need to install the keyboard, pysimplegui, and MCPI python modules and you will need to execute it as root. if anything goes wrong just use Esc to stop it (Or worst case, use Ctrl+C in the shell)
 ## To Install:
@@ -10,5 +10,5 @@ git clone https://github.com/bigjango13/Morpheus-2-hack
 ```
 ## To Run:
 ```bash
-sudo python3 Morpheus-2-hack/Morpheus.py
+sudo python3 Morpheus-2/Morpheus.py
 ```
