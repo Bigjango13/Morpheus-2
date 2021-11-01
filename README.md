@@ -26,7 +26,7 @@ This will print the XYZ locaton of a target player over time, can be used to fin
 ### Online Players
 This will tell you the amount of players on the server that you are in.
 ### FreeCam
-This allows you to look around without moving your player.
+This allows you to look around without moving your player, the controls are "w" (fast forward), "a" (fast left), "d" (fast right), "s" (fast back), "Shift" (Fast Down), "Space" (Fast up), "Up arrow" (slow forward), "left arrow" (slow left), "right arrow" (slow right), "back arrow" (slow back), "l" (slow Down), "o" (slow up)
 ### Teleport up
 This will teleport you to the highest non-air block.
 ### Chat Spammer
