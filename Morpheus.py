@@ -10,9 +10,10 @@ import keyboard, math
 import spectator_mode
 import PySimpleGUI as sg
 from random import random
+#import skynet
 from time import sleep
 
-try:
+try: # Create the mc variable
     mc = minecraft.Minecraft.create()
     entityIds = mc.getPlayerEntityIds()
     mc.camera.setNormal(entityIds[0])
@@ -21,8 +22,9 @@ except:
     window.read()
     window.close()
     quit()
-    
-realcommands = {'PlayerToPlayerTp()':'Player Teleport (M)', 'WaypointTeleport()':'Waypoint Teleport', 'SmartLocationTeleport()':'Location Teleport', 'ExactLocationTeleport()':'Exact Location Teleport', 'TrackPlayer()':'Player Tracker', 'WhosOnline()':'Online Players', 'FreeCam()':'FreeCam', 'TeleportUp()':'Teleport up', 'SpamChat()':'Chat Spammer', 'SmartSpam()':'Smart Chat Spammer', 'SafeWalk()':'Safewalk (glitchy)', 'FastBreak()':'Fast Break (M)', 'SetBlock()':'Set Block', 'ChangeWorld()':'Change all blocks in the world'}
+
+# All commands, to add a custom one just import it and add  'Module.FunctionName()':'Name Of Commmand' to the dictionary
+realcommands = {'PlayerToPlayerTp()':'Player Teleport (M)', 'WaypointTeleport()':'Waypoint Teleport', 'SmartLocationTeleport()':'Location Teleport', 'ExactLocationTeleport()':'Exact Location Teleport', 'TrackPlayer()':'Player Tracker', 'WhosOnline()':'Online Players', 'FreeCam()':'FreeCam', 'TeleportUp()':'Teleport up', 'SpamChat()':'Chat Spammer', 'SmartSpam()':'Smart Chat Spammer', 'SafeWalk()':'Safewalk (glitchy)', 'FastBreak()':'Fast Break (M)', 'SetBlock()':'Set Block'}
 
 
 def PlayerToPlayerTp():
