@@ -31,8 +31,8 @@ This allows you to look around without moving your player, the controls are "w" 
 This will teleport you to the highest non-air block.
 ### Chat Spammer
 This can spam a single message in chat.
-### Smart Chat Spammer
-This can spam more than one line in chat. (*I definitely didn't make this so I could rickroll people.*)
+### Spam from a list
+This can spam lines from a file. (good for singing/rickrolling in chat)
 ### Safewalk
 This can be used to walk on air. (Only works on servers, else it will place blocks)
 ### Fast Break
