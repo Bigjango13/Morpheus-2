@@ -1,31 +1,32 @@
 #/bin/python3
 
 # Made By FG6 (Bigjango)
-# Credit to Martin O'Hanlon (github: martinohanlon) for parts for the SafeWalk() code
 # Credit to basedSkeleton
-
+# Credit to Martin O'Hanlon (github: martinohanlon) for parts for the SafeWalk() code
 
 import mcpi.minecraft as minecraft
 import keyboard, math
 import spectator_mode
 import PySimpleGUI as sg
-from random import random
-#import skynet
 from time import sleep
+from os.path import isfile
 
-try: # Create the mc variable
+try:
     mc = minecraft.Minecraft.create()
     entityIds = mc.getPlayerEntityIds()
     mc.camera.setNormal(entityIds[0])
 except:
-    window = sg.Window('Error', [[sg.Text('An error has occurred: You need to join a world/server in MCPi to use Morpheus.')], [sg.Button('Exit')]])
+    window = sg.Window('No Minecraft Error', [[sg.Text('You need to open minecraft first')], [sg.Button('Quit')]])
     window.read()
     window.close()
     quit()
+    
+realCommands = {'PlayerToPlayerTp()':'tp to player', 'WaypointTeleport()':'Waypoint teleport', 'FastBreak()':'fastbreak', 'SmartSpam()':'Spam From A List', 'TrackPlayer()':'Track', 'SmartLocationTeleport()':'location teleport', 'WhosOnline()':'whos online', 'SetBlock()':'setblock', 'ExactLocationTeleport()':'exact location teleport', 'FreeCam()':'free cam', 'TeleportUp()':'up', 'SpamChat()':'spam', 'SafeWalk()':'Safewalk (glitchy)'}
+originalCommands = ['PlayerToPlayerTp()', 'WaypointTeleport()', 'FastBreak()', 'SmartSpam()', 'TrackPlayer()', 'SmartLocationTeleport()', 'WhosOnline()', 'SetBlock()', 'ExactLocationTeleport()', 'FreeCam()', 'TeleportUp()', 'SpamChat()', 'SafeWalk()']
 
-# All commands, to add a custom one just import it and add  'Module.FunctionName()':'Name Of Commmand' to the dictionary
-realcommands = {'PlayerToPlayerTp()':'Player Teleport (M)', 'WaypointTeleport()':'Waypoint Teleport', 'SmartLocationTeleport()':'Location Teleport', 'ExactLocationTeleport()':'Exact Location Teleport', 'TrackPlayer()':'Player Tracker', 'WhosOnline()':'Online Players', 'FreeCam()':'FreeCam', 'TeleportUp()':'Teleport up', 'SpamChat()':'Chat Spammer', 'SmartSpam()':'Smart Chat Spammer', 'SafeWalk()':'Safewalk (glitchy)', 'FastBreak()':'Fast Break (M)', 'SetBlock()':'Set Block'}
-
+def addCommand(command, name):
+    global realCommands
+    realCommands.update({command:name})
 
 def PlayerToPlayerTp():
     entityIds = mc.getPlayerEntityIds()
@@ -33,7 +34,7 @@ def PlayerToPlayerTp():
     target = 1
     while i != 'yes' and len(entityIds) != target:
         mc.camera.setFollow(entityIds[target])
-        window = sg.Window('Player Teleport', [[sg.Text('Is this the player you want to teleport to?')], [sg.Button('yes')], [sg.Button('no')]])
+        window = sg.Window('Player to player Teleport', [[sg.Text('Is this them?')], [sg.Button('yes')], [sg.Button('no')]])
         yesno = window.read()
         i = yesno[0]
         window.close()
@@ -44,7 +45,7 @@ def PlayerToPlayerTp():
         mc.player.setPos(mc.entity.getPos(entityIds[target]))
 
     else:
-        window = sg.Window('Player Teleport', [[sg.Text('There are no more players left.')], [sg.Button('Quit')]])
+        window = sg.Window('Player to player Teleport', [[sg.Text('Sorry, that is everyone')], [sg.Button('Quit')]])
         window.read()
         window.close()
         
@@ -56,24 +57,23 @@ def TrackPlayer():
     target = 1
     while i != 'yes' and len(entityIds) != target:
         mc.camera.setFollow(entityIds[target])
-        window = sg.Window('Player Tracker', [[sg.Text('Is this the player you want to track?')], [sg.Button('yes')], [sg.Button('no')]])
+        window = sg.Window('Player Tracker', [[sg.Text('Is this them?')], [sg.Button('yes')], [sg.Button('no')]])
         yesno = window.read()
         i = yesno[0]
         window.close()
         if i != 'yes':
             target = target + 1
     if not i != 'yes' and len(entityIds) != target:
-        sleeptime = int(input('How many seconds between each report should there be? '))
-        r = int(input('How many times should I report on them? '))
+        sleeptime = int(input('What is should the seconds between each report be? '))
+        r = int(input('How mny times should I report on them? '))
         while r > 0:
             print(mc.entity.getPos(entityIds[target]))
             if r != 1:
                 sleep(sleeptime)
             r = r-1
-        print('done!')
         
     else:
-        window = sg.Window('Player Tracker', [[sg.Text('Sorry, that is everyone')], [sg.Button('Quit')]])
+        window = sg.Window('Player to player Teleport', [[sg.Text('Sorry, that is everyone')], [sg.Button('Quit')]])
         window.read()
         window.close()
 
@@ -90,10 +90,8 @@ def SmartLocationTeleport():
     try:
         y = mc.getHeight(float(x),float(z))+0.01
         mc.player.setPos(float(x),float(y),float(z))
-    except TypeError:
-        print('You must input a number')
     except:
-        print('Unknown error, make sure the location exists.')
+        pass
     
 def ExactLocationTeleport():
     layout = [[sg.Text('Exact Location Teleport')], [sg.Text('X-pos:')], [sg.Input('')], [sg.Text('Y-pos:')], [sg.Input('')], [sg.Text('Z-pos:')], [sg.Input('')], [sg.Button("done")]]
@@ -106,30 +104,28 @@ def ExactLocationTeleport():
     window.close()
     try:
         mc.player.setPos(float(x),float(y),float(z))
-    except TypeError:
-        print('You must input a number')
     except:
-        print('Unknown error, make sure the location exists.')
+        pass
 
 def WhosOnline():
     entityIds = mc.getPlayerEntityIds()
     if len(entityIds) != 1:
         if len(entityIds) == 2:
-            layout = [[sg.Text("There's "+str(len(entityIds)-1)+" other player(s) online")], [sg.Button("ok")]]
-            window = sg.Window('Online Players', layout)
+            layout = [[sg.Text("you and "+str(len(entityIds)-1)+" other player is online")], [sg.Button("ok")]]
+            window = sg.Window('Whos OnLine', layout)
             window.read()
         else:
-            layout = [[sg.Text("There's "+str(len(entityIds)-1)+" other player(s) online")], [sg.Button("ok")]]
-            window = sg.Window('Online Players', layout)
+            layout = [[sg.Text("you and "+str(len(entityIds)-1)+" other players are online")], [sg.Button("ok")]]
+            window = sg.Window('Whos Online', layout)
             window.read()
     else:
-        layout = [[sg.Text('There are no other players online.')], [sg.Button("ok")]]
-        window = sg.Window('Online Players', layout)
+        layout = [[sg.Text('Sadly, you are alone')], [sg.Button("ok")]]
+        window = sg.Window('Whos OnLine', layout)
         window.read()
     window.close()
     
 def SetBlock():
-    layout = [[sg.Text('Setblock')], [sg.Text('Block ID:')], [sg.Input('')], [sg.Button("done")]]
+    layout = [[sg.Text('Setblock')], [sg.Text('what block (use block id)? ')], [sg.Input('')], [sg.Button("done")]]
     window = sg.Window('Setblock', layout)
     setblock = window.read()
     setblock = setblock[1]
@@ -137,44 +133,67 @@ def SetBlock():
     try:
         x, y, z = mc.player.getPos()
         mc.setBlock(x, y+1, z, int(setblock))
-    except TypeError:
-        print('You must input a number')
     except:
-        print('Unknown error. Make sure the block exists.')
+        pass
     window.close()
     
 def FreeCam():
     spectator_mode.switch()
 
 def SpamChat():
-    layout = [[sg.Text('Chat Spammer')], [sg.Text('Message to spam:')], [sg.Input('')], [sg.Text('Time in between each message (in seconds):')], [sg.Input('')], [sg.Button("done")]]
-    window = sg.Window('Chat Spammer', layout) #basedSkeleton moment
-    yesno = window.read()
-    cordList = yesno[1]
-    message = cordList[0]
-    sleeptime = cordList[1]
+    layout = [[sg.Text('Spam')], [sg.Text('Message to spam: ')], [sg.Input('')],[sg.Text('Delay:')], [sg.Input('')], [sg.Button("done"), sg.Button("stop")]]
+    window = sg.Window('Spam', layout)
+    spamInput = window.read()
+    if spamInput[0] == 'done':
+        inputList = spamInput[1]
+        message = inputList[0]
+        sleeptime = inputList[1]
+        if sleeptime == 's':
+            sleeptime = message.strip().count(" ")-message.strip().count("  ")/2.55
+        else:
+            try:
+                sleeptime = float(sleeptime)
+            except:
+                sleeptime = 6
+        while not keyboard.is_pressed('esc'):
+            mc.postToChat(message)
+            sleep(sleeptime)
     window.close()
-    while not keyboard.is_pressed('esc'):
-        mc.postToChat(message)
-        sleep(float(sleeptime))
-
 
 def TeleportUp():
     x,y,z = mc.player.getPos()
     y = mc.getHeight(x,z)+0.01
     mc.player.setPos(x,y,z)
-    
+ 
 def SmartSpam():
-    spam = []
-    message = input('Type a message to spam. Type (\'ex\' to finish) ')
-    while message != 'ex':
-        spam.append(message)
-        message = input('Type a message to spam. Type (\'ex\' to finish) ')
-    r = input('How many messages should be sent?')
-    for n in range(0, int(r)):
-        for i in spam:
-            mc.postToChat(i)
-            sleep(1)
+    layout = [[sg.Text('List Spam')], [sg.Text('File to spam from (include the path to it): ')], [sg.Input('')], [sg.Text('Amount:')], [sg.Input('')], [sg.Button("done"), sg.Button("stop")]]
+    window = sg.Window('List Spam', layout)
+    spamInput = window.read()
+    if spamInput[0] == 'done':
+        inputList = spamInput[1]
+        message = inputList[0]
+        amount = inputList[1]
+        window.close()
+        try:
+            amount = int(amount)
+        except:
+            amount = 1
+        if amount < 1:
+            amount = 1
+        if isfile(message) == True:
+            sleeptime = message.strip().count(" ")-message.strip().count("  ")/2.55
+            spamList = open(message, 'r')
+            for i in range(amount):
+                for line in spamList.readlines():
+                    if not line.strip() == '':
+                        mc.postToChat(line.strip().rstrip('?'))
+                        if keyboard.is_pressed('esc'):
+                            return 0
+                        sleep(line.strip().count(" ")-line.strip().count("  ")/6)
+                        if keyboard.is_pressed('esc'):
+                            return 0
+                    else:
+                        sleep(3)
 
 def distance(x,y,z,x2,y2,z2):
     xd = x2 - x
@@ -190,9 +209,9 @@ def WaypointTeleport():
     if i == 'Set': # making it so you can actually save a location
         global wayx,wayy,wayz
         wayx,wayy,wayz = mc.player.getPos()
-        file = open("morpheus.ini", "w") #making the location saved stay even when the game is closed
+        file = open("morpheus.ini", "w") # making the location saved stay even when the game is closed
         file.write("[morpheus]\nwayx: " + "'" + str(wayx) + "'\nwayy: " + "'" + str(wayy) + "'\nwayz" + "'" + str(wayz) + "'" ) #write to file
-        file.close #done
+        file.close # done
     if i == 'Use': # changing the variables so they don't get overwritten
         mc.player.setPos(wayx, wayy, wayz)
 
@@ -201,6 +220,7 @@ def roundVec3(vec3):
 
 def SafeWalk():
     unsafeblocks = [0, 10, 11, 30]
+    mc = minecraft.Minecraft.create()
     lastPlayerPos = mc.player.getPos()
     while not keyboard.is_pressed('esc'):
         playerPos = mc.player.getPos()
@@ -225,41 +245,36 @@ def FastBreak():
             for change_x in range(-2, 2):
                 for change_z in range(-2, 2):
                     if mc.getBlock(x+change_x,y+change_y,z+change_z) != 0:
-                        mc.setBlock(x+change_x,y+change_y,z+change_z,0)
-def ChangeWorld():
-    layout = [[sg.Text('Change all the blocks in the world')], [sg.Text('Block ID:')], [sg.Input('')], [sg.Button("done")]]
-    window = sg.Window('Change all blocks', layout)
-    setblock = window.read()
-    setblock = setblock[1]
-    setblock = setblock[0]
-    try:
-        mc.setBlocks(-256, -128, -256, 256, 128, 256,int(setblock))
-    except TypeError:
-        print('You must input a number')
-    except:
-        print('Unknown error. Make sure the block exists.')
+                        mc.setBlock(x+change_x,y+change_y,z+change_z,38)
 
-menulayout = []
-layout = ''
-for commander in realcommands:
-    if commander == list(realcommands)[len(realcommands)-1]:
-        layout = layout + ('[sg.Button("'+realcommands[commander]+'")]')
-    else:
-        layout = layout + ('[sg.Button("'+realcommands[commander]+'")], ')
+def getGuiLayout(commandList):
+    menulayout = []
+    for commander in commandList:
+        menulayout.append([sg.Button(commandList[commander])])
 
-exec('menulayout = [[sg.Text("Select a hack to use.")], '+str(layout)+']')
-window = sg.Window('Morpheus 2.0', menulayout)
+    return menulayout
 
-while True:
-    buttonpressed = window.read()
-    t=list({s for s in realcommands if realcommands[s]==buttonpressed[0]})
-    if str(buttonpressed[0]) == 'None':
-        quit()
-    else:
-        try:
-            exec(t[0])
-        except Exception as oops:
-            window = sg.Window('Error', [[sg.Text('An error has occured: '+str(oops))], [sg.Button('Quit')]])
-            window.read()
-            window.close()
+def start():
+    window = sg.Window('Morpheus 2 Hack', getGuiLayout(realCommands))
+    while True:
+        buttonpressed = window.read()
+        t = list({s for s in realCommands if realCommands[s]==buttonpressed[0]})
+        if str(buttonpressed[0]) == 'None':
             quit()
+        else:
+            try:
+                if t[0] in originalCommands:
+                    exec(t[0])
+                else:
+                    exec("__main__."+t[0])
+            except Exception as oops:
+                    window = sg.Window('Error', [[sg.Text('Sorry, something went wrong error message: '+str(oops))], [sg.Button('Quit')]])
+                    window.read()
+                    window.close()
+                    quit()
+                    
+
+if __name__ == "__main__":
+    start()
+else:
+    import __main__
