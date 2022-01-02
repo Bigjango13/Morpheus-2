@@ -6,7 +6,7 @@ You will need to install the keyboard, pysimplegui, and MCPI python modules and 
 Run this in terminal (Ctrl+C and Ctrl+Shift+V) 
 ```bash
 sudo pip3 install keyboard pysimplegui mcpi
-git clone https://github.com/bigjango13/Morpheus-2-hack
+git clone https://github.com/bigjango13/Morpheus-2
 ```
 ## To Run:
 ```bash
