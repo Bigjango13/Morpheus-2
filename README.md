@@ -3,7 +3,7 @@ A use of the python MCPI to enhance the multiplayer and singleplayer gameplay.
 ## To Use:
 You will need to install the keyboard, pysimplegui, and MCPI python modules and you will need to execute it as root. if anything goes wrong just use Esc to stop it (Or worst case, use Ctrl+C in the shell)
 ## To Install:
-Run this in terminal (Ctrl+C and Ctrl+Shift+V) 
+Run this in terminal (Ctrl+C and Ctrl+Shift+V)
 ```bash
 sudo pip3 install keyboard pysimplegui mcpi
 git clone https://github.com/bigjango13/Morpheus-2
@@ -39,3 +39,17 @@ This can be used to walk on air. (Only works on servers, else it will place bloc
 This allows you to break blocks on server faster (You can use it to get bedrock in survival mode) DO NOT USE IN SINGLE PLAYER!!
 ### Set Block
 This will set a block on your head.
+## The API
+While there are many things that you can do with just Morpheus, there is an easy way to add more features with the API.
+Here is an example of adding a command:
+```python
+import Morpheus
+
+def exampleFunction():
+   print('This is an example.')
+
+Morpheus.addCommand('exampleFunction()', 'Example API function')
+Morpheus.start()
+```
+fisrt you import Morpheus and add a command called `"Example API function"` which calls the function `exampleFunction()`.
+After you have added all fo your custom hacks with `Morpheus.addCommand('function', 'name')` you can run `Morpheus.start()` to start Morpheus.
