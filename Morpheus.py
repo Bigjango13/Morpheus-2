@@ -20,7 +20,7 @@ except:
     window.read()
     window.close()
     quit()
-    
+
 realCommands = {'PlayerToPlayerTp()':'tp to player', 'WaypointTeleport()':'Waypoint teleport', 'FastBreak()':'fastbreak', 'SmartSpam()':'Spam From A List', 'TrackPlayer()':'Track', 'SmartLocationTeleport()':'location teleport', 'WhosOnline()':'whos online', 'SetBlock()':'setblock', 'ExactLocationTeleport()':'exact location teleport', 'FreeCam()':'free cam', 'TeleportUp()':'up', 'SpamChat()':'spam', 'SafeWalk()':'Safewalk (glitchy)'}
 originalCommands = ['PlayerToPlayerTp()', 'WaypointTeleport()', 'FastBreak()', 'SmartSpam()', 'TrackPlayer()', 'SmartLocationTeleport()', 'WhosOnline()', 'SetBlock()', 'ExactLocationTeleport()', 'FreeCam()', 'TeleportUp()', 'SpamChat()', 'SafeWalk()']
 
@@ -48,9 +48,9 @@ def PlayerToPlayerTp():
         window = sg.Window('Player to player Teleport', [[sg.Text('Sorry, that is everyone')], [sg.Button('Quit')]])
         window.read()
         window.close()
-        
+
     mc.camera.setNormal(entityIds[0])
-    
+
 def TrackPlayer():
     entityIds = mc.getPlayerEntityIds()
     i = ''
@@ -71,7 +71,7 @@ def TrackPlayer():
             if r != 1:
                 sleep(sleeptime)
             r = r-1
-        
+
     else:
         window = sg.Window('Player to player Teleport', [[sg.Text('Sorry, that is everyone')], [sg.Button('Quit')]])
         window.read()
@@ -92,7 +92,7 @@ def SmartLocationTeleport():
         mc.player.setPos(float(x),float(y),float(z))
     except:
         pass
-    
+
 def ExactLocationTeleport():
     layout = [[sg.Text('Exact Location Teleport')], [sg.Text('X-pos:')], [sg.Input('')], [sg.Text('Y-pos:')], [sg.Input('')], [sg.Text('Z-pos:')], [sg.Input('')], [sg.Button("done")]]
     window = sg.Window('Exact Location Teleport', layout)
@@ -123,7 +123,7 @@ def WhosOnline():
         window = sg.Window('Whos OnLine', layout)
         window.read()
     window.close()
-    
+
 def SetBlock():
     layout = [[sg.Text('Setblock')], [sg.Text('what block (use block id)? ')], [sg.Input('')], [sg.Button("done")]]
     window = sg.Window('Setblock', layout)
@@ -136,7 +136,7 @@ def SetBlock():
     except:
         pass
     window.close()
-    
+
 def FreeCam():
     spectator_mode.switch()
 
@@ -164,7 +164,7 @@ def TeleportUp():
     x,y,z = mc.player.getPos()
     y = mc.getHeight(x,z)+0.01
     mc.player.setPos(x,y,z)
- 
+
 def SmartSpam():
     layout = [[sg.Text('List Spam')], [sg.Text('File to spam from (include the path to it): ')], [sg.Input('')], [sg.Text('Amount:')], [sg.Input('')], [sg.Button("done"), sg.Button("stop")]]
     window = sg.Window('List Spam', layout)
@@ -264,17 +264,18 @@ def start():
         else:
             try:
                 if t[0] in originalCommands:
-                    exec(t[0])
+                    method_name = t[0][:-2]
+                    possibles = globals().copy()
+                    possibles.update(locals())
+                    method = possibles.get(method_name)
+                    method()
                 else:
-                    exec("__main__."+t[0])
+                    getattr(__main__, t[0][:-2])()
             except Exception as oops:
                     window = sg.Window('Error', [[sg.Text('Sorry, something went wrong error message: '+str(oops))], [sg.Button('Quit')]])
                     window.read()
                     window.close()
                     quit()
-                    
 
 if __name__ == "__main__":
     start()
-else:
-    import __main__
