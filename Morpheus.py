@@ -4,6 +4,9 @@
 # Credit to basedSkeleton
 # Credit to Martin O'Hanlon (github: martinohanlon) for parts for the SafeWalk() code
 
+if __name__ != "__main__":
+    import __main__
+
 import mcpi.minecraft as minecraft
 import keyboard, math
 import spectator_mode
