@@ -30,6 +30,8 @@ originalCommands = ['PlayerToPlayerTp()', 'WaypointTeleport()', 'FastBreak()', '
 def addCommand(command, name):
     global realCommands
     realCommands.update({command:name})
+    if command in originalCommands:
+        originalCommands.remove(command)
 
 def PlayerToPlayerTp():
     entityIds = mc.getPlayerEntityIds()
