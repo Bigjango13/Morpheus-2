@@ -229,6 +229,7 @@ def SafeWalk():
     lastPlayerPos = mc.player.getPos()
     while not keyboard.is_pressed('esc'):
         playerPos = mc.player.getPos()
+        mc.setBlock(playerPos.x, playerPos.y-1, playerPos.z, 246)
         movementX = lastPlayerPos.x - playerPos.x
         movementZ = lastPlayerPos.z - playerPos.z
         if ((movementX < -0.2) or (movementX > 0.2) or (movementZ < -0.2) or (movementZ > 0.2)):
@@ -239,8 +240,7 @@ def SafeWalk():
             if blockBelowPos.z < 0: blockBelowPos.z = blockBelowPos.z - 1
             if blockBelowPos.x < 0: blockBelowPos.x = blockBelowPos.x - 1
             blockBelowPos.y = blockBelowPos.y - 1
-            if mc.getBlock(blockBelowPos) in unsafeblocks:
-                mc.setBlock(blockBelowPos.x, blockBelowPos.y, blockBelowPos.z, 246)
+            mc.setBlock(blockBelowPos.x, blockBelowPos.y, blockBelowPos.z, 246)
             lastPlayerPos = playerPos
 
 def FastBreak():
