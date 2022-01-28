@@ -6,38 +6,38 @@ You will need to install the keyboard, pysimplegui, and MCPI python modules and 
 Run this in terminal (Ctrl+C and Ctrl+Shift+V)
 ```bash
 git clone https://github.com/bigjango13/Morpheus-2
-sudo python3 setup.py install
+sudo python3 Morpheus-2/setup.py install
 ```
 ## To Run:
 ```bash
 sudo morpheus
 ```
 ## Features:
-### Player Teleport
+### Player Teleport (`PlayerToPlayerTp()`)
 This will teleport your player to any other player in the server, you use the yes and no buttons to pick who you teleport to.
-### Waypoint Teleport
+### Waypoint Teleport (`WaypointTeleport()`)
 You can use this to save a location and then teleport back to it. (One of the many uses of this is when you die, save your location and then teleport back to it after you respawn.)
-### Location Teleport
+### Location Teleport (`SmartLocationTeleport()`)
 This will teleport your player to a certain XZ coordinates, you will not need to input the Y becuase the program automagically brings you to the top-most non-air block. (if you want to teleport to a XYZ location please use "Exact Location Teleport")
-### Exact Location Teleport
+### Exact Location Teleport (`ExactLocationTeleport()`)
 This will teleport your player to an XYZ location.
-### Player Tracker
+### Player Tracker (`TrackPlayer()`)
 This will print the XYZ locaton of a target player over time, can be used to find bases.
-### Online Players
+### Online Players (`WhosOnline()`)
 This will tell you the amount of players on the server that you are in.
-### FreeCam
+### FreeCam (`FreeCam()`)
 This allows you to look around without moving your player, the controls are "w" (fast forward), "a" (fast left), "d" (fast right), "s" (fast back), "Shift" (Fast Down), "Space" (Fast up), "Up arrow" (slow forward), "left arrow" (slow left), "right arrow" (slow right), "back arrow" (slow back), "l" (slow Down), "o" (slow up)
-### Teleport up
+### Teleport up (`TeleportUp()`)
 This will teleport you to the highest non-air block.
-### Chat Spammer
+### Chat Spammer (`SpamChat()`)
 This can spam a single message in chat.
-### Spam from a list
+### Spam from a list (`SmartSpam()`)
 This can spam lines from a file. (good for singing/rickrolling in chat)
-### Safewalk
+### Safewalk (`SafeWalk()`)
 This can be used to walk on air. (Only works on servers, else it will place blocks)
-### Fast Break
+### Fast Break (`FastBreak()`)
 This allows you to break blocks on server faster (You can use it to get bedrock in survival mode) DO NOT USE IN SINGLE PLAYER!!
-### Set Block
+### Set Block (`SetBlock()`)
 This will set a block on your head.
 ## The API
 While there are many things that you can do with just Morpheus, there is an easy way to add more features with the API.
