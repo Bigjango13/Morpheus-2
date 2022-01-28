@@ -53,7 +53,7 @@ Morpheus.start()
 ```
 fisrt you import Morpheus and add a command called `"Example API function"` which calls the function `exampleFunction()`.
 After you have added all fo your custom hacks with `Morpheus.addCommand('function', 'name')` you can run `Morpheus.start()` to start Morpheus.
-## Contributors
+## Contributors:
 - [basedSkeleton](https://github.com/basedSkeleton)
 - [RennyMCPI](https://github.com/rennymcpi)
 - [LEHAtupointow](https://github.com/leha-code)
