@@ -13,7 +13,7 @@ setup(
     license="MIT",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    packages=["morpheus"],
+    packages=["morpheus_mcpi"],
     install_requires=["keyboard", "pysimplegui", "mcpi"],
     classifiers=[
         "Development Status :: 5 - Production/Stable",
@@ -21,8 +21,8 @@ setup(
     ],
     entry_points={
         "console_scripts": [
-            "morpheus = morpheus.__main__:start",
-            "mcpi-spectator = morpheus.spectator_mode:switch",
+            "morpheus = morpheus_mcpi.__main__:start",
+            "mcpi-spectator = morpheus_mcpi.spectator_mode:switch",
         ]
     },
 )

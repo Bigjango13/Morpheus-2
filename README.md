@@ -43,7 +43,7 @@ This will set a block on your head.
 While there are many things that you can do with just Morpheus, there is an easy way to add more features with the API.
 Here is an example of adding a command:
 ```python
-import Morpheus
+import mcpi_morpheus as Morpheus
 
 def exampleFunction():
    print('This is an example.')
