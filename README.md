@@ -1,7 +1,7 @@
 # Morpheus 2.0
 A use of the python MCPI to enhance the multiplayer and singleplayer gameplay.
 ## To Use:
-You will need to install the keyboard, pysimplegui, and MCPI python modules and you will need to execute it as root. if anything goes wrong just use Esc to stop it (Or worst case, use Ctrl+C in the shell)
+Run `setup.py` like you would on any Python library.
 ## To Install:
 Run this in terminal (Ctrl+C and Ctrl+Shift+V)
 ```bash
@@ -43,13 +43,13 @@ This will set a block on your head.
 While there are many things that you can do with just Morpheus, there is an easy way to add more features with the API.
 Here is an example of adding a command:
 ```python
-import mcpi_morpheus as Morpheus
+import mcpi_morpheus as morpheus
 
 def exampleFunction():
    print('This is an example.')
 
-Morpheus.addCommand('exampleFunction()', 'Example API function')
-Morpheus.start()
+morpheus.addCommand('exampleFunction()', 'Example API function')
+morpheus.start()
 ```
 fisrt you import Morpheus and add a command called `"Example API function"` which calls the function `exampleFunction()`.
 After you have added all fo your custom hacks with `Morpheus.addCommand('function', 'name')` you can run `Morpheus.start()` to start Morpheus.

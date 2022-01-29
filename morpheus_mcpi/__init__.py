@@ -3,7 +3,7 @@
 # Made By FG6 (Bigjango)
 # Credit to basedSkeleton
 # Credit to Martin O'Hanlon (github: martinohanlon) for parts for the SafeWalk() code
-
+# Credit to leha-code
 
 import mcpi.minecraft as minecraft
 import keyboard, math
@@ -187,32 +187,32 @@ def WhosOnline():
                 ],
                 [sg.Button("ok")],
             ]
-            window = sg.Window("Whos OnLine", layout)
+            window = sg.Window("Who's OnLine", layout)
             window.read()
         else:
             layout = [
                 [
                     sg.Text(
-                        "you and "
+                        "You and "
                         + str(len(entityIds) - 1)
                         + " other players are online"
                     )
                 ],
-                [sg.Button("ok")],
+                [sg.Button("OK")],
             ]
-            window = sg.Window("Whos Online", layout)
+            window = sg.Window("Who's Online", layout)
             window.read()
     else:
         layout = [[sg.Text("Sadly, you are alone")], [sg.Button("ok")]]
-        window = sg.Window("Whos OnLine", layout)
+        window = sg.Window("Who's Online", layout)
         window.read()
     window.close()
 
 
 def SetBlock():
     layout = [
-        [sg.Text("Setblock")],
-        [sg.Text("what block (use block id)? ")],
+        [sg.Text("Set block")],
+        [sg.Text("What block (use block id)? ")],
         [sg.Input("")],
         [sg.Button("done")],
     ]
@@ -356,19 +356,22 @@ def roundVec3(vec3):
 
 
 def SafeWalk():
-    
+
     window = sg.Window(
         "Warning",
-        [[sg.Text("Do not try this in singleplayer. Sneak to place blocks below.")], [sg.Button("OK")]],
+        [
+            [sg.Text("Do not try this in singleplayer. Sneak to place blocks below.")],
+            [sg.Button("OK")],
+        ],
     )
     window.read()
     window.close()
-    
+
     mc = minecraft.Minecraft.create()
     lastPlayerPos = mc.player.getPos()
     while not keyboard.is_pressed("esc"):
         playerPos = mc.player.getPos()
-        mc.setBlock(playerPos.x, playerPos.y - 1, playerPos.z, 246)
+        mc.setBlock(playerPos.x, playerPos.y - 1, playerPos.z, 20)
         movementX = lastPlayerPos.x - playerPos.x
         movementZ = lastPlayerPos.z - playerPos.z
         if (
@@ -403,7 +406,8 @@ def FastBreak():
             for change_x in range(-2, 2):
                 for change_z in range(-2, 2):
                     if mc.getBlock(x + change_x, y + change_y, z + change_z) != 0:
-                        mc.setBlock(x + change_x, y + change_y, z + change_z, 38)
+                        mc.setBlock(x + change_x, y + change_y, z + change_z, 20)
+        mc.setBlock(x, y - 1, z, 22)
 
 
 def getGuiLayout(commandList):
