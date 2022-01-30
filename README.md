@@ -1,12 +1,11 @@
-# Morpheus 2.0
+# Morpheus
 A use of the python MCPI to enhance the multiplayer and singleplayer gameplay.
 ## To Use:
 Run `setup.py` like you would on any Python library.
 ## To Install:
 Run this in terminal (Ctrl+C and Ctrl+Shift+V)
 ```bash
-git clone https://github.com/bigjango13/Morpheus-2
-sudo python3 Morpheus-2/setup.py install
+sudo pip3 install morpheus-mcpi
 ```
 ## To Run:
 ```bash
