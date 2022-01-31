@@ -57,4 +57,4 @@ After you have added all fo your custom hacks with `Morpheus.addCommand('functio
 - [RennyMCPI](https://github.com/rennymcpi)
 - [LEHAtupointow](https://github.com/leha-code)
 
-If you like this, or you think you can contribute, please join the [discord](https://discord.com/invite/ADcAPeBb4M)
+If you like this, or you think you can contribute, please join the [discord](https://discord.com/invite/ADcAPeBb4M).
