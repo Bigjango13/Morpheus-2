@@ -1,6 +1,7 @@
 # Morpheus
 
 [![Discord](https://img.shields.io/discord/936402601853984778?color=violet&label=Discord%20Server&logo=discord&logoColor=white)](https://discord.com/invite/ADcAPeBb4M)
+[![GitHub all releases](https://img.shields.io/github/downloads/bigjango13/Morpheus-2/total?color=yellow&label=Downloads)](https://github.com/bigjango13/morpheus-2/releases)
 
 A use of the python MCPI to enhance the multiplayer and singleplayer gameplay.
 ## To Use:
