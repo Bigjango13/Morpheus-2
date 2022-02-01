@@ -1,4 +1,7 @@
 # Morpheus
+
+[![Discord](https://img.shields.io/discord/936402601853984778?color=violet&label=Discord%20Server&logo=discord&logoColor=white)](https://discord.com/invite/ADcAPeBb4M)
+
 A use of the python MCPI to enhance the multiplayer and singleplayer gameplay.
 ## To Use:
 Run `setup.py` like you would on any Python library.
