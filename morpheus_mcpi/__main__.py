@@ -1,4 +1,4 @@
-import morpheus
+import morpheus_mcpi
 
 
 if __name__ == "__main__":
