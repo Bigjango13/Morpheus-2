@@ -4,6 +4,10 @@
 [![GitHub all releases](https://img.shields.io/github/downloads/bigjango13/Morpheus-2/total?color=yellow&label=Downloads)](https://github.com/bigjango13/morpheus-2/releases)
 ![GitHub forks](https://img.shields.io/github/forks/bigjango13/Morpheus-2?logo=github)
 ![GitHub Repo stars](https://img.shields.io/github/stars/bigjango13/morpheus-2?logo=github)
+![PyPI - License](https://img.shields.io/pypi/l/morpheus-mcpi)
+![PyPI](https://img.shields.io/pypi/v/morpheus-mcpi)
+![PyPI - Downloads](https://img.shields.io/pypi/dm/morpheus-mcpi)
+
 
 A use of the python MCPI to enhance the multiplayer and singleplayer gameplay.
 ## To Use:
