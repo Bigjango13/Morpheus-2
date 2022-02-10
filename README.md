@@ -66,7 +66,6 @@ After you have added all fo your custom hacks with `Morpheus.addCommand('functio
 - [basedSkeleton](https://github.com/basedSkeleton)
 - [RennyMCPI](https://github.com/rennymcpi)
 - [LEHAtupointow](https://github.com/leha-code)
+- [Bigjango13](https://github.com/bigjango13)
 
 If you like this, or you think you can contribute, please join the [discord](https://discord.com/invite/ADcAPeBb4M).
-
--BigJango
