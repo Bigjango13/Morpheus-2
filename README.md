@@ -68,3 +68,5 @@ After you have added all fo your custom hacks with `Morpheus.addCommand('functio
 - [LEHAtupointow](https://github.com/leha-code)
 
 If you like this, or you think you can contribute, please join the [discord](https://discord.com/invite/ADcAPeBb4M).
+
+-BigJango
