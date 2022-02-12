@@ -12,6 +12,9 @@ import PySimpleGUI as sg
 from time import sleep
 from os.path import isfile
 
+if __name__ != "__main__":
+    import __main__
+
 try:
     mc = minecraft.Minecraft.create()
     entityIds = mc.getPlayerEntityIds()
