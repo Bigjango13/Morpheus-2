@@ -6,7 +6,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setup(
     name="morpheus-mcpi",
-    version="2.1",
+    version="2.3",
     description="A set of tools to improve the user's experience in Minecraft: Pi Edition.",
     url="https://github.com/bigjango13/Morpheus-2",
     author="bigjango13",

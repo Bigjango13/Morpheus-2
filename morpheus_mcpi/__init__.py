@@ -7,64 +7,30 @@
 
 import mcpi.minecraft as minecraft
 import keyboard, math
+
 from . import spectator_mode
+import sys
 import PySimpleGUI as sg
 from time import sleep
 from os.path import isfile
 
-if __name__ != "__main__":
-    import __main__
-
-try:
-    mc = minecraft.Minecraft.create()
-    entityIds = mc.getPlayerEntityIds()
-    mc.camera.setNormal(entityIds[0])
-except:
-    window = sg.Window(
-        "Minecraft not detected",
-        [[sg.Text("You need to open minecraft first")], [sg.Button("Quit")]],
-    )
-    window.read()
-    window.close()
-    quit()
-
-realCommands = {
-    "PlayerToPlayerTp()": "Teleport to player",
-    "WaypointTeleport()": "Waypoint teleport",
-    "FastBreak()": "Fast break",
-    "SmartSpam()": "Spam From A List",
-    "TrackPlayer()": "Track a player",
-    "SmartLocationTeleport()": "Location teleport",
-    "WhosOnline()": "Who's online",
-    "SetBlock()": "setblock",
-    "ExactLocationTeleport()": "Exact location teleport",
-    "FreeCam()": "Freecam",
-    "TeleportUp()": "Up",
-    "SpamChat()": "Spam",
-    "SafeWalk()": "Safewalk (glitchy)",
-}
-originalCommands = [
-    "PlayerToPlayerTp()",
-    "WaypointTeleport()",
-    "FastBreak()",
-    "SmartSpam()",
-    "TrackPlayer()",
-    "SmartLocationTeleport()",
-    "WhosOnline()",
-    "SetBlock()",
-    "ExactLocationTeleport()",
-    "FreeCam()",
-    "TeleportUp()",
-    "SpamChat()",
-    "SafeWalk()",
-]
-
-
-def addCommand(command, name):
-    global realCommands
-    realCommands.update({command: name})
-    if command in originalCommands:
-        originalCommands.remove(command)
+while True:
+    try:
+        mc = minecraft.Minecraft.create()
+        entityIds = mc.getPlayerEntityIds()
+        mc.camera.setNormal(entityIds[0])
+        break
+    except ConnectionRefusedError:
+        window = sg.Window(
+            "Minecraft not detected",
+            [
+                [sg.Text("You need to open minecraft first")],
+                [sg.Button("Quit"), sg.Button("Retry")],
+            ],
+        )
+        if window.read()[0] != "Retry":
+            window.close()
+            sys.exit(0)
 
 
 def PlayerToPlayerTp():
@@ -292,7 +258,6 @@ def SmartSpam():
         if amount < 1:
             amount = 1
         if isfile(message) == True:
-            sleeptime = message.strip().count(" ") - message.strip().count("  ") / 2.55
             spamList = open(message, "r")
             for i in range(amount):
                 for line in spamList.readlines():
@@ -413,6 +378,32 @@ def FastBreak():
         mc.setBlock(x, y - 1, z, 22)
 
 
+commands = {
+    PlayerToPlayerTp: "Teleport to player",
+    WaypointTeleport: "Waypoint teleport",
+    FastBreak: "Fast break",
+    SmartSpam: "Spam From A List",
+    TrackPlayer: "Track a player",
+    SmartLocationTeleport: "Location teleport",
+    WhosOnline: "Who's online",
+    SetBlock: "setblock",
+    ExactLocationTeleport: "Exact location teleport",
+    FreeCam: "Freecam",
+    TeleportUp: "Up",
+    SpamChat: "Spam",
+    SafeWalk: "Safewalk (glitchy)",
+}
+
+
+def addCommand(name):
+    def dec(command):
+        global commands
+        commands.update({command: name})
+        return command
+
+    return dec
+
+
 def getGuiLayout(commandList):
     menulayout = []
     for commander in commandList:
@@ -422,38 +413,44 @@ def getGuiLayout(commandList):
 
 
 def start():
-    window = sg.Window("Morpheus 2 Minecraft Hack", getGuiLayout(realCommands))
+    window = sg.Window("Morpheus 2 Minecraft Hack", getGuiLayout(commands))
     while True:
-        buttonpressed = window.read()
-        t = list({s for s in realCommands if realCommands[s] == buttonpressed[0]})
-        if str(buttonpressed[0]) == "None":
+        try:
+            command = window.read()[0]
+        except KeyboardInterrupt:
+            sys.exit(0)
+        t = [s for s in commands if commands[s] == command]
+        if command is None or len(t) == 0:
             quit()
         else:
             try:
-                if t[0] in originalCommands:
-                    method_name = t[0][:-2]
-                    possibles = globals().copy()
-                    possibles.update(locals())
-                    method = possibles.get(method_name)
-                    method()
-                else:
-                    getattr(__main__, t[0][:-2])()
-            except Exception as oops:
-                window = sg.Window(
+                t[0]()
+            except Exception as e:
+                print(
+                    'Oh no! While trying to execute "'
+                    + t[0].__name__
+                    + '" this error occurred: "'
+                    + str(e)
+                    + '" Please report this: '
+                    + "https://github.com/Bigjango13/Morpheus-2/issues/new"
+                )
+                errorWindow = sg.Window(
                     "Error",
                     [
                         [
                             sg.Text(
-                                "Sorry, something went wrong. Error message: "
-                                + str(oops)
+                                "Oh no! Something went wrong.\n"
+                                + "Error message: "
+                                + str(e)
                             )
                         ],
-                        [sg.Button("Quit")],
+                        [sg.Button("Quit"), sg.Button("Continue")],
                     ],
                 )
-                window.read()
-                window.close()
-                quit()
+                if errorWindow.read()[0] != "Continue":
+                    errorWindow.close()
+                    sys.exit(0)
+                errorWindow.close()
 
 
 if __name__ == "__main__":

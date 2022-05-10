@@ -54,14 +54,14 @@ Here is an example of adding a command:
 ```python
 import morpheus
 
+@morpheus.addCommand('Example API function')
 def exampleFunction():
    print('This is an example.')
 
-morpheus.addCommand('exampleFunction()', 'Example API function')
 morpheus.start()
 ```
 fisrt you import Morpheus and add a command called `"Example API function"` which calls the function `exampleFunction()`.
-After you have added all fo your custom hacks with `Morpheus.addCommand('function', 'name')` you can run `Morpheus.start()` to start Morpheus.
+After you have added all of your custom hacks with `Morpheus.addCommand('function', 'name')` you can run `Morpheus.start()` to start Morpheus.
 ## Contributors:
 - [basedSkeleton](https://github.com/basedSkeleton)
 - [RennyMCPI](https://github.com/rennymcpi)
